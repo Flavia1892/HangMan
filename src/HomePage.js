@@ -2,6 +2,8 @@ import React from "react";
 import Title from "./Components/Title";
 import { Suspense, useState, useEffect } from "react";
 import { Transition } from "react-transition-group";
+import { Switch } from "@mui/material";
+import ContainerHomePage from "./Components/ContainerHomePage";
 
 function HomePage() {
   let [isLoading, setLoading] = useState(true);
@@ -30,6 +32,33 @@ function HomePage() {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, []); // Empty dependency array to run effect only on mount
+
+  //Theme for page
+  const [theme, setTheme] = useState(() => {
+    const initalTheme = localStorage.getItem("theme");
+    return initalTheme ? initalTheme : "light";
+  });
+
+  function getThemeFromLocalStorage() {
+    const savedTheme = localStorage.getItem("theme");
+
+    if (savedTheme) {
+      setTheme(savedTheme);
+    }
+  }
+
+  function toggleTheme() {
+    setTheme((prevTheme) => {
+      const newTheme = prevTheme === "light" ? "dark" : "light";
+      localStorage.setItem("theme", newTheme);
+      console.log(theme);
+      return newTheme;
+    });
+  }
+  useEffect(() => {
+    getThemeFromLocalStorage();
+  }, [theme]);
+  //End of theme light-dark
 
   return (
     <>
@@ -61,16 +90,20 @@ function HomePage() {
                 >
                   Start the game
                 </button>
-                
+
                 <p class="text-2xl">Press the button or any key to start</p>
               </div>
             )}
           </Transition>
         </div>
       ) : (
-        <Suspense fallback={<Loading />}>
-          <Title />
-        </Suspense>
+        <div className={theme}>
+          <Suspense fallback={<Loading />}>
+            <Title />
+            <ContainerHomePage />
+            <Switch onClick={toggleTheme}></Switch>
+          </Suspense>
+        </div>
       )}
     </>
   );
