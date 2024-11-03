@@ -1,15 +1,11 @@
-import React from 'react'
+import React from "react";
 
 function HomePage() {
   return (
     <>
-        
-        
-       <p class="text-lg"> HomePage</p>
-        
-        
-        </>
-  )
+      <p class="text-6xl"> HomePage</p>
+    </>
+  );
 }
 
-export default HomePage
+export default HomePage;
