@@ -27,8 +27,6 @@ function Title() {
             margin: "auto",
             paddingTop: "30px",
             paddingBottom: "90px",
-            marginBottom: "300px",
-            marginTop: "300px",
           }}
         >
           <HashLoader />
@@ -44,7 +42,7 @@ function Title() {
                 }}
               >
                 <p class="text-6xl pt-5 pb-5">HangMan Game</p>
-                <HangingSoundPlayer/>
+                <HangingSoundPlayer />
               </div>
             )}
           </Transition>

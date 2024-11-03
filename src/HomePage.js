@@ -7,14 +7,8 @@ import ContainerHomePage from "./Components/ContainerHomePage";
 
 function HomePage() {
   let [isLoading, setLoading] = useState(true);
-  let [isFlashing, setIsFlashing] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setIsFlashing(!isFlashing);
-    }, 500);
-  });
   setTimeout(() => {
     setIsVisible(!isVisible);
   }, 2000);
@@ -100,8 +94,8 @@ function HomePage() {
         <div className={theme}>
           <Suspense fallback={<Loading />}>
             <Title />
-            <ContainerHomePage />
             <Switch onClick={toggleTheme}></Switch>
+            <ContainerHomePage />
           </Suspense>
         </div>
       )}
