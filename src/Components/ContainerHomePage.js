@@ -30,7 +30,6 @@ function ContainerHomePage() {
     }, 3500);
   }, []);
 
- 
   return (
     <>
       <div>
@@ -86,7 +85,6 @@ function ContainerHomePage() {
                           strokeDasharray="50"
                         />
                       </svg>
-                     <GameMusic/>
                     </>
                   )}
                 </div>
@@ -95,6 +93,7 @@ function ContainerHomePage() {
                     <p>Loading....</p>
                   ) : (
                     <>
+                      <GameMusic />
                       <FetchWord />
                     </>
                   )}

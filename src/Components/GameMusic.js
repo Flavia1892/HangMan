@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import music from "../Sounds/gameMusic.mp3";
 
 const GameMusic = () => {
