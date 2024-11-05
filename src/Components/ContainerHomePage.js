@@ -1,9 +1,28 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Transition } from "react-transition-group";
+import HangingElement from "./HangingElement";
+import FetchWord from "./FetchWord";
+import GameMusic from "./GameMusic";
 
 function ContainerHomePage() {
   const [isVisible, setIsVisible] = useState(false);
+  const [isVisibleSVG, setIsVisibleSVG] = useState(true); // Initially the SVG is visible
+
+  let themeColor = localStorage.getItem("theme");
+  let color = "";
+  if (themeColor === "dark") color = "white";
+  else color = "black";
+
+  useEffect(() => {
+    // Set a timeout to hide the SVG after 3 seconds (3000 ms)
+    const timer = setTimeout(() => {
+      setIsVisibleSVG(false); // Hide the SVG by setting state to false
+    }, 21000); // Change to the desired timeout duration (in milliseconds)
+
+    // Clean up the timeout if the component unmounts
+    return () => clearTimeout(timer);
+  }, []); // Empty dependency array means this effect runs only once when the component mounts
 
   useEffect(() => {
     setTimeout(() => {
@@ -11,6 +30,7 @@ function ContainerHomePage() {
     }, 3500);
   }, []);
 
+ 
   return (
     <>
       <div>
@@ -23,8 +43,62 @@ function ContainerHomePage() {
               }}
             >
               <div className="grid-container">
-                <div className="grid-item">Column 1</div>
-                <div className="grid-item">Column 2</div>
+                <div className="grid-item">
+                  {isVisibleSVG ? (
+                    <HangingElement />
+                  ) : (
+                    <>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 200 250"
+                        width="400"
+                        height="400"
+                        className={isVisibleSVG ? "" : "fade-in"}
+                      >
+                        {/* Tree Trunk */}
+                        <line
+                          x1="100"
+                          y1="50"
+                          x2="100"
+                          y2="150"
+                          stroke={color}
+                          strokeWidth="2"
+                          strokeDasharray="100"
+                        />
+
+                        {/* Tree Branches */}
+                        <line
+                          x1="100"
+                          y1="50"
+                          x2="70"
+                          y2="80"
+                          stroke={color}
+                          strokeWidth="2"
+                          strokeDasharray="50"
+                        />
+                        <line
+                          x1="100"
+                          y1="50"
+                          x2="130"
+                          y2="80"
+                          stroke={color}
+                          strokeWidth="2"
+                          strokeDasharray="50"
+                        />
+                      </svg>
+                     <GameMusic/>
+                    </>
+                  )}
+                </div>
+                <div className="grid-item">
+                  {isVisibleSVG ? (
+                    <p>Loading....</p>
+                  ) : (
+                    <>
+                      <FetchWord />
+                    </>
+                  )}
+                </div>
               </div>
             </div>
           )}

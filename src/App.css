@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  overflow-y: hidden;
 }
 
 .dark {
@@ -30,6 +31,47 @@
   padding: 20px;
   text-align: center;
   border-radius: 4px;
+
+}
+
+.hangman-tree {
+  transform-origin: center bottom;
+  transition: transform 1s ease-in-out;
+  width: 100%;
+}
+
+.hangman-tree.swing {
+  animation: swing 2s ease-in-out infinite;
+  width: 100%;
+}
+
+@keyframes swing {
+  0% {
+    transform: rotate(10deg);
+  }
+
+  50% {
+    transform: rotate(-10deg);
+  }
+
+  100% {
+    transform: rotate(10deg);
+  }
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 3s ease-in forwards;
+  /* Animates opacity from 0 to 1 */
+  width: 100%;
+
+
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
 }
 
 @media (max-width: 768px) {
